@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Preprocess LLC4320 data
+# In[6]:
 
-# This program is to preprcess the LLC4320 data using the xmitgcm llcreader package. 
-# 
-# Note that it needs the 'submeso_env' environment
-
-# In[1]:
 
 
 from xmitgcm import llcreader
@@ -43,6 +38,7 @@ ds_W_full = model.get_dataset(varnames=['W'], type='latlon')
 ds_W_full_interp = ds_W_full.interp(k_l=ds_T_full.k)
 ds_UV_full_interp = ds_UV_full.interp(j_g=ds_T_full.j, i_g=ds_T_full.i)
 
+del ds_UV_full, ds_W_full
 
 # In[12]:
 
@@ -67,6 +63,7 @@ U = ds_UV_full_interp.U.resample(time='24H').nearest(tolerance="1H").where(sel_a
 V = ds_UV_full_interp.V.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
 W = ds_W_full_interp.W.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
 
+del ds_T_full, ds_S_full, ds_UV_full_interp, ds_W_full_interp
 
 # In[13]:
 
@@ -93,6 +90,7 @@ B = -G*sigma0/rho0
 
 B = B.rename('Buoyancy')
 
+del S, P, G, CT
 
 # In[14]:
 # regrid and select middle 10 degree box
@@ -114,23 +112,25 @@ j_max_10deg = max(sel_area_10deg[0])
 i_slice_10deg = slice(i_min_10deg, i_max_10deg)
 j_slice_10deg = slice(j_min_10deg, j_max_10deg)
 
-B.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = B.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('B.png')
 plt.close()
+del fig
 
-U.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = U.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('U.png')
 plt.close()
+del fig
 
-V.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = V.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('V.png')
 plt.close()
+del fig
 
-W.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = W.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('W.png')
 plt.close()
-# In[15]:
-
+del fig
 
 # sigma0 at 10m depth for reference
 sigma0_10m = sigma0.isel(k=6).broadcast_like(sigma0).chunk(chunks={'time': 1, 'k':1, 'j': sigma0.j.size, 'i': sigma0.i.size})
@@ -143,9 +143,11 @@ MLD = sigma0.Z.broadcast_like(sigma0).where(delta_sigma<=0.03).min(dim="k",skipn
 
 # In[17]:
 
-MLD.isel(time=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = MLD.isel(time=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('MLD.png')
 plt.close()
+
+del MLD, fig
 # # Filtering: fixed factor scale 24
 
 # In[18]:
@@ -246,22 +248,25 @@ Bm = filter_factor24.apply(B.where(wet_mask), dims=['i', 'j'])
 
 # In[22]:
 
-Bm.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Bm.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Bm.png')
 plt.close()
+del fig
 
-Um.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Um.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Um.png')
 plt.close()
+del fig
 
-Vm.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Vm.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Vm.png')
 plt.close()
+del fig
 
-Wm.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Wm.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Wm.png')
 plt.close()
-# In[23]:
+del fig
 
 # submesoscale field defined as the deviation between the full resolved field and mesoscale field
 
@@ -270,47 +275,56 @@ Vs = V - Vm
 Ws = W - Wm
 Bs = B - Bm
 
+del U, V, W, B
 
 # In[24]:
 
-Bs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Bs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Bs.png')
 plt.close()
+del fig
 
-Us.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Us.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Us.png')
 plt.close()
+del fig
 
-Vs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Vs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Vs.png')
 plt.close()
+del fig
 
-Ws.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Ws.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Ws.png')
 plt.close()
+del fig
+
+# submesoscale buoyancy fluxes, with a mesoscale filter
+
+UsBs = filter_factor24.apply((Us * Bs).where(wet_mask), dims=['i', 'j'])
+VsBs = filter_factor24.apply((Vs * Bs).where(wet_mask), dims=['i', 'j'])
+WsBs = filter_factor24.apply((Ws * Bs).where(wet_mask), dims=['i', 'j'])
+
+del Us, Vs, Ws, Bs
+
 # In[ ]:
 
-# submesoscale buoyancy fluxes
-
-UsBs = Us * Bs
-VsBs = Vs * Bs
-WsBs = Ws * Bs
-
-
-# In[ ]:
-
-UsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = UsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('UsBs.png')
 plt.close()
+del fig
 
-VsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = VsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('VsBs.png')
 plt.close()
+del fig
 
-WsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = WsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('WsBs.png')
 plt.close()
-# In[ ]:
+del fig
+
+
 
 # mesoscale buoyancy gradient
 # need to tomperarily rechunk for the z derivative
@@ -319,18 +333,20 @@ Bm_y = Bm.differentiate("j")
 Bm_z = Bm.chunk(chunks={"time":len(T.time), "k":len(T.k), "j":len(T.j), "i": len(T.i)}).differentiate("k").chunk(chunks={"time":1, "k":1, "j":len(T.j), "i": len(T.i)})
 
 # In[ ]:
-Bm_x.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Bm_x.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Bm_x.png')
 plt.close()
+del fig
 
-Bm_y.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Bm_y.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Bm_y.png')
 plt.close()
+del fig
 
-Bm_z.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
+fig = Bm_z.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('Bm_z.png')
 plt.close()
-
+del fig
 # ## Coarse-grain to 1/4 degree
 # 
 # 
@@ -377,111 +393,135 @@ UsBs_lowres = regridder_quarter(UsBs).sel(lon=lon_slice_10deg,lat=lat_slice_10de
 VsBs_lowres = regridder_quarter(VsBs).sel(lon=lon_slice_10deg,lat=lat_slice_10deg) 
 WsBs_lowres = regridder_quarter(WsBs).sel(lon=lon_slice_10deg,lat=lat_slice_10deg)  
 
+del Um, Vm, Wm, Bm, UsBs, VsBs, WsBs, Bm_x, Bm_y, Bm_z
 
 # In[ ]:
 
-Bm_lowres.isel(time=0,k=0).plot()
+fig = Bm_lowres.isel(time=0,k=0).plot()
 plt.savefig('Bm_lowres.png')
 plt.close()
+del fig
 
-Um_lowres.isel(time=0,k=0).plot()
+fig = Um_lowres.isel(time=0,k=0).plot()
 plt.savefig('Um_lowres.png')
 plt.close()
+del fig
 
-Vm_lowres.isel(time=0,k=0).plot()
+fig = Vm_lowres.isel(time=0,k=0).plot()
 plt.savefig('Vm_lowres.png')
 plt.close()
+del fig
 
-Wm_lowres.isel(time=0,k=0).plot()
+fig = Wm_lowres.isel(time=0,k=0).plot()
 plt.savefig('Wm_lowres.png')
 plt.close()
+del fig
 
-Bm_x_lowres.isel(time=0,k=0).plot()
+fig = Bm_x_lowres.isel(time=0,k=0).plot()
 plt.savefig('Bm_x_lowres.png')
 plt.close()
+del fig
 
-Bm_y_lowres.isel(time=0,k=0).plot()
+fig = Bm_y_lowres.isel(time=0,k=0).plot()
 plt.savefig('Bm_y_lowres.png')
 plt.close()
+del fig
 
-Bm_z_lowres.isel(time=0,k=0).plot()
+fig = Bm_z_lowres.isel(time=0,k=0).plot()
 plt.savefig('Bm_z_lowres.png')
 plt.close()
+del fig
 
-UsBs_lowres.isel(time=0,k=0).plot()
+fig = UsBs_lowres.isel(time=0,k=0).plot()
 plt.savefig('UsBs_lowres.png')
 plt.close()
+del fig
 
-VsBs_lowres.isel(time=0,k=0).plot()
+fig = VsBs_lowres.isel(time=0,k=0).plot()
 plt.savefig('VsBs_lowres.png')
 plt.close()
+del fig
 
-WsBs_lowres.isel(time=0,k=0).plot()
+fig = WsBs_lowres.isel(time=0,k=0).plot()
 plt.savefig('WsBs_lowres.png')
 plt.close()
-# ## Depth averaged
+del fig
 
 # In[ ]:
 
 
-# meso velocities and buoyancy
+# meso velocities and buoyancy MLD average
 Um_lowres_MLD = Um_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Um_lowres_MLD')
 Vm_lowres_MLD = Vm_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Vm_lowres_MLD')
 Wm_lowres_MLD = Wm_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Wm_lowres_MLD')
 Bm_lowres_MLD = Bm_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Bm_lowres_MLD')
 
-# submeso fluxes 
+# submeso fluxes MLD average
 UsBs_lowres_MLD = UsBs_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('UsBs_lowres_MLD')
 VsBs_lowres_MLD = VsBs_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('VsBs_lowres_MLD')
 WsBs_lowres_MLD = WsBs_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('WsBs_lowres_MLD')
 
-# meso gradients
+# meso gradients MLD average
 Bm_x_lowres_MLD = Bm_x_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Bm_x_lowres_MLD')
 Bm_y_lowres_MLD = Bm_y_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Bm_y_lowres_MLD')
 Bm_z_lowres_MLD = Bm_z_lowres.where(delta_sigma<=0.03).min(dim="k",skipna=True).rename('Bm_z_lowres_MLD')
 
 
+del Um_lowres, Vm_lowres, Wm_lowres, Bm_lowres
+del UsBs_lowres, VsBs_lowres, WsBs_lowres
+del Bm_x_lowres, Bm_y_lowres, Bm_z_lowres
+
 # In[ ]:
 
-Bm_lowres_MLD.isel(time=0).plot()
+fig = Bm_lowres_MLD.isel(time=0).plot()
 plt.savefig('Bm_lowres_MLD.png')
 plt.close()
+del fig
 
-Um_lowres_MLD.isel(time=0).plot()
+fig = Um_lowres_MLD.isel(time=0).plot()
 plt.savefig('Um_lowres_MLD.png')
 plt.close()
+del fig
 
-Vm_lowres_MLD.isel(time=0).plot()
+fig = Vm_lowres_MLD.isel(time=0).plot()
 plt.savefig('Vm_lowres_MLD.png')
 plt.close()
+del fig
 
-Wm_lowres_MLD.isel(time=0).plot()
+fig = Wm_lowres_MLD.isel(time=0).plot()
 plt.savefig('Wm_lowres_MLD.png')
 plt.close()
+del fig
 
-Bm_x_lowres_MLD.isel(time=0).plot()
+fig = Bm_x_lowres_MLD.isel(time=0).plot()
 plt.savefig('Bm_x_lowres_MLD.png')
 plt.close()
+del fig
 
-Bm_y_lowres_MLD.isel(time=0).plot()
+fig = Bm_y_lowres_MLD.isel(time=0).plot()
 plt.savefig('Bm_y_lowres_MLD.png')
 plt.close()
+del fig
 
-Bm_z_lowres_MLD.isel(time=0,k=0).plot()
+fig = Bm_z_lowres_MLD.isel(time=0,k=0).plot()
 plt.savefig('Bm_z_lowres_MLD.png')
 plt.close()
+del fig
 
-UsBs_lowres_MLD.isel(time=0).plot()
+fig = UsBs_lowres_MLD.isel(time=0).plot()
 plt.savefig('UsBs_lowres_MLD.png')
 plt.close()
+del fig
 
-VsBs_lowres_MLD.isel(time=0).plot()
+fig = VsBs_lowres_MLD.isel(time=0).plot()
 plt.savefig('VsBs_lowres_MLD.png')
 plt.close()
+del fig
 
-WsBs_lowres_MLD.isel(time=0).plot()
+fig = WsBs_lowres_MLD.isel(time=0).plot()
 plt.savefig('WsBs_lowres_MLD.png')
 plt.close()
+del fig
 # # Save data: stack input and output, save snapshots
 
 # In[ ]:
@@ -519,17 +559,20 @@ def save_data(PATH, CASE_NAME, dataset_ind, Um_lowres_MLD, Vm_lowres_MLD, Wm_low
             UsBs_data,
             VsBs_data,
             WsBs_data,
+        ], axis=0).astype(np.float32)
+
+        #loss
+        cnn_loss_ii = np.stack([
             Bm_x_data,
             Bm_y_data,
             Bm_z_data
         ], axis=0).astype(np.float32)
-
-
     
     
         ########## Save  data
         FULL_PATH_input = PATH+CASE_NAME+'input/'
         FULL_PATH_output = PATH+CASE_NAME+'output/'
+        FULL_PATH_loss = PATH+CASE_NAME+'loss/'
 
         # Check whether the specified path exists or not
         isExist = os.path.exists(FULL_PATH_input)
@@ -538,10 +581,13 @@ def save_data(PATH, CASE_NAME, dataset_ind, Um_lowres_MLD, Vm_lowres_MLD, Wm_low
             print("The new input directory is created!")
             os.makedirs(FULL_PATH_output)
             print("The new output directory is created!")
-        
+            os.makedirs(FULL_PATH_loss)
+            print("The new loss directory is created!")
+
 
         np.save(FULL_PATH_input+str(ii)+'.npy', cnn_input_ii)
         np.save(FULL_PATH_output+str(ii)+'.npy', cnn_output_ii)
+        np.save(FULL_PATH_loss+str(ii)+'.npy', cnn_loss_ii)
 
     np.save(PATH+CASE_NAME+'dataset_ind.npy', dataset_ind)
 
@@ -564,7 +610,7 @@ train_ind, test_ind, val_ind =  rand_ind[:round(train_percent*time_ind)], rand_i
 
 
 # Save train, test and val datasets
-CASE_NAME = 'lat_-57_-42_lon_25_40'
+CASE_NAME = 'lat_-57_-42_lon_23_37'
 BASE = '/scratch/ab10313/submeso_ML_data/'
 
 # Train set
@@ -587,3 +633,10 @@ print('DONE')
 
 
 print('COMPLETE')
+
+
+# In[ ]:
+
+
+
+

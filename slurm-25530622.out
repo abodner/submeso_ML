@@ -37,15 +37,6 @@ To avoid creating the large chunks, set the option
     >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
     ...     array[indexer]
   value = value[(slice(None),) * axis + (subkey,)]
-/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
-chunk and silence this warning, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
-    ...     array[indexer]
-
-To avoid creating the large chunks, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
-    ...     array[indexer]
-  value = value[(slice(None),) * axis + (subkey,)]
 Traceback (most recent call last):
   File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 53, in _runner
     result[0] = await coro
@@ -66,22 +57,22 @@ asyncio.exceptions.TimeoutError
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/home/ab10313/submeso_ML/preprocess_llc4320.py", line 68, in <module>
-    W = ds_W_full_interp.W.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
+  File "/home/ab10313/submeso_ML/preprocess_llc4320.py", line 67, in <module>
+    V = ds_UV_full_interp.V.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
   File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/common.py", line 1078, in where
     self = self.isel(**indexers)
   File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 1283, in isel
     ds = self._to_temp_dataset()._isel_fancy(
-  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 2443, in _isel_fancy
-    new_var = var.isel(indexers=var_indexers)
-  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/variable.py", line 1226, in isel
-    return self[key]
-  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/variable.py", line 785, in __getitem__
-    dims, indexer, new_order = self._broadcast_indexes(key)
-  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/variable.py", line 646, in _broadcast_indexes
-    return self._broadcast_indexes_outer(key)
-  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/variable.py", line 699, in _broadcast_indexes_outer
-    k = np.asarray(k)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 2458, in _isel_fancy
+    coord_vars, new_indexes = selected._get_indexers_coords_and_indexes(indexers)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 2314, in _get_indexers_coords_and_indexes
+    v_coords = v[v.values.nonzero()[0]].coords
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 685, in values
+    return self.variable.values
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/variable.py", line 527, in values
+    return _as_array_or_item(self._data)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/variable.py", line 267, in _as_array_or_item
+    data = np.asarray(data)
   File "/ext3/miniconda3/lib/python3.9/site-packages/dask/array/core.py", line 1626, in __array__
     x = self.compute()
   File "/ext3/miniconda3/lib/python3.9/site-packages/dask/base.py", line 290, in compute

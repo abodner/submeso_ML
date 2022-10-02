@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Preprocess LLC4320 data
+# In[6]:
 
-# This program is to preprcess the LLC4320 data using the xmitgcm llcreader package. 
-# 
-# Note that it needs the 'submeso_env' environment
-
-# In[1]:
 
 
 from xmitgcm import llcreader
@@ -43,6 +38,7 @@ ds_W_full = model.get_dataset(varnames=['W'], type='latlon')
 ds_W_full_interp = ds_W_full.interp(k_l=ds_T_full.k)
 ds_UV_full_interp = ds_UV_full.interp(j_g=ds_T_full.j, i_g=ds_T_full.i)
 
+del ds_UV_full, ds_W_full
 
 # In[12]:
 
@@ -67,6 +63,7 @@ U = ds_UV_full_interp.U.resample(time='24H').nearest(tolerance="1H").where(sel_a
 V = ds_UV_full_interp.V.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
 W = ds_W_full_interp.W.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
 
+del ds_T_full, ds_S_full, ds_UV_full_interp, ds_W_full_interp
 
 # In[13]:
 
@@ -93,6 +90,7 @@ B = -G*sigma0/rho0
 
 B = B.rename('Buoyancy')
 
+del S, P, G, CT
 
 # In[14]:
 # regrid and select middle 10 degree box
@@ -270,6 +268,7 @@ Vs = V - Vm
 Ws = W - Wm
 Bs = B - Bm
 
+del U, V, W, B, MLD
 
 # In[24]:
 
@@ -297,6 +296,7 @@ VsBs = Vs * Bs
 WsBs = Ws * Bs
 
 
+
 # In[ ]:
 
 UsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
@@ -311,6 +311,9 @@ WsBs.isel(time=0,k=0,i=i_slice_10deg,j=j_slice_10deg).plot()
 plt.savefig('WsBs.png')
 plt.close()
 # In[ ]:
+
+del Us, Vs, Ws, Bs 
+
 
 # mesoscale buoyancy gradient
 # need to tomperarily rechunk for the z derivative
@@ -377,6 +380,7 @@ UsBs_lowres = regridder_quarter(UsBs).sel(lon=lon_slice_10deg,lat=lat_slice_10de
 VsBs_lowres = regridder_quarter(VsBs).sel(lon=lon_slice_10deg,lat=lat_slice_10deg) 
 WsBs_lowres = regridder_quarter(WsBs).sel(lon=lon_slice_10deg,lat=lat_slice_10deg)  
 
+del Um, Vm, Wm, Bm, UsBs, VsBs, WsBs, Bm_x, Bm_y, Bm_z
 
 # In[ ]:
 
@@ -419,7 +423,10 @@ plt.close()
 WsBs_lowres.isel(time=0,k=0).plot()
 plt.savefig('WsBs_lowres.png')
 plt.close()
-# ## Depth averaged
+
+del Um_lowres, Vm_lowres, Wm_lowres, Bm_lowres
+del UsBs_lowres, VsBs_lowres, WsBs_lowres
+del Bm_x_lowres, Bm_y_lowres, Bm_z_lowres
 
 # In[ ]:
 
@@ -587,3 +594,10 @@ print('DONE')
 
 
 print('COMPLETE')
+
+
+# In[ ]:
+
+
+
+

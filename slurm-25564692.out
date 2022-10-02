@@ -10,42 +10,6 @@ To avoid creating the large chunks, set the option
     >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
     ...     array[indexer]
   value = value[(slice(None),) * axis + (subkey,)]
-/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
-chunk and silence this warning, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
-    ...     array[indexer]
-
-To avoid creating the large chunks, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
-    ...     array[indexer]
-  value = value[(slice(None),) * axis + (subkey,)]
-/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
-chunk and silence this warning, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
-    ...     array[indexer]
-
-To avoid creating the large chunks, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
-    ...     array[indexer]
-  value = value[(slice(None),) * axis + (subkey,)]
-/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
-chunk and silence this warning, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
-    ...     array[indexer]
-
-To avoid creating the large chunks, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
-    ...     array[indexer]
-  value = value[(slice(None),) * axis + (subkey,)]
-/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
-chunk and silence this warning, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
-    ...     array[indexer]
-
-To avoid creating the large chunks, set the option
-    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
-    ...     array[indexer]
-  value = value[(slice(None),) * axis + (subkey,)]
 Traceback (most recent call last):
   File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 53, in _runner
     result[0] = await coro
@@ -66,10 +30,10 @@ asyncio.exceptions.TimeoutError
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/home/ab10313/submeso_ML/preprocess_llc4320.py", line 68, in <module>
-    W = ds_W_full_interp.W.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
-  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/common.py", line 1078, in where
-    self = self.isel(**indexers)
+  File "/home/ab10313/submeso_ML/preprocess_llc4320_plots.py", line 60, in <module>
+    T = ds_T_full.Theta.resample(time='24H').nearest(tolerance="1H").where(sel_area, drop=True)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/common.py", line 1079, in where
+    cond = cond.isel(**indexers)
   File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 1283, in isel
     ds = self._to_temp_dataset()._isel_fancy(
   File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 2443, in _isel_fancy
