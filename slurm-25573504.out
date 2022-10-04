@@ -50,3 +50,71 @@ To avoid creating the large chunks, set the option
   return np.nanmin(x_chunk, axis=axis, keepdims=keepdims)
 /ext3/miniconda3/lib/python3.9/site-packages/dask/array/core.py:450: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
   o = func(*args, **kwargs)
+Traceback (most recent call last):
+  File "/home/ab10313/submeso_ML/preprocess_llc4320_plots.py", line 430, in <module>
+    fig = Bm_z_lowres.isel(time=0,k=0).plot()
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/plot/plot.py", line 868, in __call__
+    return plot(self._da, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/plot/plot.py", line 297, in plot
+    darray = darray.squeeze().compute()
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 993, in compute
+    return new.load(**kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 967, in load
+    ds = self._to_temp_dataset().load(**kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 733, in load
+    evaluated_data = da.compute(*lazy_data.values(), **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/base.py", line 573, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/threaded.py", line 81, in get
+    results = get_async(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/local.py", line 506, in get_async
+    raise_exception(exc, tb)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/local.py", line 314, in reraise
+    raise exc
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/local.py", line 219, in execute_task
+    result = _execute_task(task, data)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in <genexpr>
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in <genexpr>
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in <genexpr>
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in <genexpr>
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in <genexpr>
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in <genexpr>
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/home/ab10313/.local/lib/python3.9/site-packages/xmitgcm/llcreader/llcmodel.py", line 507, in _get_facet_chunk
+    buffer = file.read(read_length)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/implementations/http.py", line 574, in read
+    return super().read(length)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/spec.py", line 1575, in read
+    out = self.cache._fetch(self.loc, self.loc + length)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/caching.py", line 377, in _fetch
+    self.cache = self.fetcher(start, bend)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 111, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 96, in sync
+    raise return_result
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 53, in _runner
+    result[0] = await coro
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/implementations/http.py", line 613, in async_fetch_range
+    r.raise_for_status()
+  File "/home/ab10313/.local/lib/python3.9/site-packages/aiohttp/client_reqrep.py", line 1004, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url=URL('https://data.nas.nasa.gov/ecco/download_data.php?file=/eccodata/llc_4320/compressed/0001137024/Theta.0001137024.data.shrunk')
