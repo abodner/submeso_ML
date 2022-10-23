@@ -1,0 +1,68 @@
+WARNING: Could not find any nv files on this host!
+/ext3/miniconda3/lib/python3.9/site-packages/numba/core/cpu.py:97: UserWarning: Numba extension module 'sparse._numba_extension' failed to load due to 'ContextualVersionConflict((numpy 1.22.4 (/ext3/miniconda3/lib/python3.9/site-packages), Requirement.parse('numpy<1.22,>=1.18'), {'numba'}))'.
+  numba.core.entrypoints.init_all()
+PREPROCESS CASE lat_-57_-42_lon_23_37/
+2022-10-10 19:46:13.712144
+T,S,U,V,W FROM LLC4320
+2022-10-10 19:46:13.712168
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+CALCULATE B
+2022-10-10 23:07:12.468337
+SAVE SNAPSHOT: B,U,V,W
+2022-10-10 23:13:32.933984
+SAVE SNAPSHOT: MLD
+2022-10-10 23:13:41.772941
+FILTER
+2022-10-10 23:13:42.795572
+MLD AVERAGE
+2022-10-11 00:24:08.653022
+Traceback (most recent call last):
+  File "/home/ab10313/submeso_ML/preprocess_code/preprocess_llc4320_save_lat_-57_-42_lon_23_37_debug2.py", line 300, in <module>
+    Um_MLD = Um.where(delta_sigma<=0.03).mean(dim="k",skipna=True).rename('Um_MLD').chunk(chunks={"time":1, "lat":len(Um.lat), "lon": len(Um.lon)})
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/common.py", line 256, in __getattr__
+    raise AttributeError(
+AttributeError: 'DataArray' object has no attribute 'lat'

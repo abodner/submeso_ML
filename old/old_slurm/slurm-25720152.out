@@ -1,0 +1,70 @@
+WARNING: Could not find any nv files on this host!
+/ext3/miniconda3/lib/python3.9/site-packages/numba/core/cpu.py:97: UserWarning: Numba extension module 'sparse._numba_extension' failed to load due to 'ContextualVersionConflict((numpy 1.22.4 (/ext3/miniconda3/lib/python3.9/site-packages), Requirement.parse('numpy<1.22,>=1.18'), {'numba'}))'.
+  numba.core.entrypoints.init_all()
+PREPROCESS CASE lat_-57_-42_lon_23_37/
+2022-10-08 13:01:08.887481
+T,S,U,V,W FROM LLC4320
+2022-10-08 13:01:08.887512
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+CALCULATE B
+2022-10-08 16:24:02.312458
+SAVE SNAPSHOT: B,U,V,W
+2022-10-08 16:31:12.599814
+SAVE SNAPSHOT: MLD
+2022-10-08 16:31:22.253685
+FILTER
+2022-10-08 16:31:23.352135
+COARSE-GRAIN
+2022-10-08 18:11:39.349759
+/ext3/miniconda3/lib/python3.9/site-packages/dask/array/core.py:450: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  o = func(*args, **kwargs)
+MLD AVERAGE
+2022-10-08 18:12:10.878541
+SAVE NETCDF: MLD AVG LOWRES
+meso fields
+/bin/bash: line 1: 3432295 Killed                  python -u preprocess_llc4320_save_lat_-57_-42_lon_23_37_debug.py
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=25720152.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

@@ -1,0 +1,71 @@
+WARNING: Could not find any nv files on this host!
+T,S,UV,W FULL DATASETS FROM LLC4320
+CASE equator_pacific/
+2022-10-23 09:39:22.602520
+path already exsits...
+path already exsits...
+LOAD DATASETS: ds_T,ds_S
+2022-10-23 09:39:22.605071
+SELECET AREA ON T GRID
+2022-10-23 09:40:19.042500
+ds_T:SELECT
+2022-10-23 09:40:19.056683
+Traceback (most recent call last):
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/implementations/http.py", line 391, in _info
+    await _file_info(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/implementations/http.py", line 772, in _file_info
+    r.raise_for_status()
+  File "/home/ab10313/.local/lib/python3.9/site-packages/aiohttp/client_reqrep.py", line 1004, in raise_for_status
+    raise ClientResponseError(
+aiohttp.client_exceptions.ClientResponseError: 500, message='Internal Server Error', url=URL('https://data.nas.nasa.gov/ecco/download_data.php?file=/eccodata/llc_4320/grid/RC.data')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ab10313/submeso_ML/preprocess/equator_pacific/llc4320_equator_pacific.py", line 64, in <module>
+    ds_T = ds_T_full.where(sel_area_T, drop=True).resample(time='24H').nearest(tolerance="1H")
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/common.py", line 1078, in where
+    self = self.isel(**indexers)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 2387, in isel
+    return self._isel_fancy(indexers, drop=drop, missing_dims=missing_dims)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataset.py", line 2433, in _isel_fancy
+    indexes, index_variables = isel_indexes(self.xindexes, valid_indexers)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexes.py", line 1357, in isel_indexes
+    return _apply_indexes(indexes, indexers, "isel")
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexes.py", line 1341, in _apply_indexes
+    new_index = getattr(index, func)(index_args)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexes.py", line 362, in isel
+    return self._replace(self.index[indxr])
+  File "/ext3/miniconda3/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 5055, in __getitem__
+    result = getitem(key)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/array/core.py", line 1626, in __array__
+    x = self.compute()
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/base.py", line 290, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/base.py", line 573, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/threaded.py", line 81, in get
+    results = get_async(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/local.py", line 506, in get_async
+    raise_exception(exc, tb)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/local.py", line 314, in reraise
+    raise exc
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/local.py", line 219, in execute_task
+    result = _execute_task(task, data)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/home/ab10313/.local/lib/python3.9/site-packages/xmitgcm/llcreader/llcmodel.py", line 537, in _get_1d_chunk
+    file = fs.open(path)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/spec.py", line 1034, in open
+    f = self._open(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/implementations/http.py", line 340, in _open
+    size = size or self.info(path, **kwargs)["size"]
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 111, in wrapper
+    return sync(self.loop, func, *args, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 96, in sync
+    raise return_result
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/asyn.py", line 53, in _runner
+    result[0] = await coro
+  File "/ext3/miniconda3/lib/python3.9/site-packages/fsspec/implementations/http.py", line 404, in _info
+    raise FileNotFoundError(url) from exc
+FileNotFoundError: https://data.nas.nasa.gov/ecco/download_data.php?file=/eccodata/llc_4320/grid/RC.data

@@ -1,0 +1,78 @@
+WARNING: Could not find any nv files on this host!
+/ext3/miniconda3/lib/python3.9/site-packages/numba/core/cpu.py:97: UserWarning: Numba extension module 'sparse._numba_extension' failed to load due to 'ContextualVersionConflict((numpy 1.22.4 (/ext3/miniconda3/lib/python3.9/site-packages), Requirement.parse('numpy<1.22,>=1.18'), {'numba'}))'.
+  numba.core.entrypoints.init_all()
+PREPROCESS CASE lat_-57_-42_lon_23_37/
+2022-10-05 08:42:11.832574
+T,S,U,V,W FROM LLC4320
+2022-10-05 08:42:11.832619
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/indexing.py:1380: PerformanceWarning: Slicing is producing a large chunk. To accept the large
+chunk and silence this warning, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': False}):
+    ...     array[indexer]
+
+To avoid creating the large chunks, set the option
+    >>> with dask.config.set(**{'array.slicing.split_large_chunks': True}):
+    ...     array[indexer]
+  value = value[(slice(None),) * axis + (subkey,)]
+CALCULATE B
+2022-10-05 12:24:08.739452
+SAVE SNAPSHOT: B,U,V,W
+2022-10-05 12:31:00.120355
+SAVE SNAPSHOT: MLD
+2022-10-05 12:31:08.624189
+FILTER
+2022-10-05 12:31:09.546392
+COARSE-GRAIN
+2022-10-05 14:16:02.068294
+/ext3/miniconda3/lib/python3.9/site-packages/dask/array/core.py:450: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  o = func(*args, **kwargs)
+MLD AVERAGE
+2022-10-05 14:16:33.846980
+SAVE NETCDF: MLD AVG LOWRES
+meso fields
+Traceback (most recent call last):
+  File "/home/ab10313/submeso_ML/preprocess_code/preprocess_llc4320_save_lat_-57_-42_lon_23_37.py", line 383, in <module>
+    Um_lowres_MLD.to_netcdf(PATH+'data/Um_lowres_MLD.nc',engine='h5netcdf')
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 3217, in to_netcdf
+    return to_netcdf(  # type: ignore  # mypy cannot resolve the overloads:(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/api.py", line 1193, in to_netcdf
+    store = store_open(target, mode, format, group, **kwargs)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/h5netcdf_.py", line 169, in open
+    if Version(h5netcdf.__version__) >= Version("0.10.0") and Version(
+NameError: name 'h5netcdf' is not defined
