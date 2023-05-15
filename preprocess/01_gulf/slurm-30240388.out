@@ -1,0 +1,31 @@
+WARNING: Could not find any nv files on this host!
+/home/ab10313/.local/lib/python3.9/site-packages/xrft/xrft.py:47: FutureWarning: Please provide the name of window adhering to scipy.signal.windows. The boolean option will be deprecated in future releases.
+  warnings.warn(
+/home/ab10313/.local/lib/python3.9/site-packages/xrft/xrft.py:47: FutureWarning: Please provide the name of window adhering to scipy.signal.windows. The boolean option will be deprecated in future releases.
+  warnings.warn(
+/home/ab10313/.local/lib/python3.9/site-packages/xrft/xrft.py:1025: FutureWarning: Isotropic wavenumber larger than the Nyquist wavenumber may result.
+  warnings.warn(msg, FutureWarning)
+Traceback (most recent call last):
+  File "/home/ab10313/submeso_ML/preprocess/01_gulf/cospectrum.py", line 113, in <module>
+    WB_cross_spectra.to_netcdf(PATH_PP+'WB_cross_spectra_new.nc',engine='h5netcdf')
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/core/dataarray.py", line 3217, in to_netcdf
+    return to_netcdf(  # type: ignore  # mypy cannot resolve the overloads:(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/api.py", line 1210, in to_netcdf
+    dump_to_store(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/api.py", line 1257, in dump_to_store
+    store.store(variables, attrs, check_encoding, writer, unlimited_dims=unlimited_dims)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/common.py", line 267, in store
+    self.set_variables(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/common.py", line 305, in set_variables
+    target, source = self.prepare_variable(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/xarray/backends/h5netcdf_.py", line 330, in prepare_variable
+    nc4_var = self.ds.create_variable(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/h5netcdf/core.py", line 791, in create_variable
+    return group._create_child_variable(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/h5netcdf/core.py", line 610, in _create_child_variable
+    self._root._check_valid_netcdf_dtype(dtype)
+  File "/ext3/miniconda3/lib/python3.9/site-packages/h5netcdf/core.py", line 1073, in _check_valid_netcdf_dtype
+    _invalid_netcdf_feature(
+  File "/ext3/miniconda3/lib/python3.9/site-packages/h5netcdf/core.py", line 49, in _invalid_netcdf_feature
+    raise CompatibilityError(msg)
+h5netcdf.core.CompatibilityError: complex dtypes are not a supported NetCDF feature, and are not allowed by h5netcdf unless invalid_netcdf=True.

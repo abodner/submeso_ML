@@ -1,0 +1,6 @@
+WARNING: Could not find any nv files on this host!
+/home/ab10313/.local/lib/python3.9/site-packages/xrft/xrft.py:47: FutureWarning: Please provide the name of window adhering to scipy.signal.windows. The boolean option will be deprecated in future releases.
+  warnings.warn(
+/home/ab10313/.local/lib/python3.9/site-packages/xrft/xrft.py:1025: FutureWarning: Isotropic wavenumber larger than the Nyquist wavenumber may result.
+  warnings.warn(msg, FutureWarning)
+slurmstepd: error: *** JOB 30454773 ON cl004 CANCELLED AT 2023-02-23T10:22:40 ***

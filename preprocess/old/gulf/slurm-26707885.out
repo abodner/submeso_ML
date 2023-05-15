@@ -1,0 +1,65 @@
+WARNING: Could not find any nv files on this host!
+PREPROCESS CASE gulf/
+2022-11-05 20:16:53.158375
+CALCULATE OR LOAD B
+2022-11-05 20:16:53.158409
+B DOES NOT EXIST: CALCULATING...
+LOAD ds_T, ds_S AND SET CHUNKS
+2022-11-05 20:16:53.161730
+SAVE SIGMA
+2022-11-05 20:16:55.159807
+SIGMA:START
+2022-11-05 20:16:55.159840
+SIGMA:COMPLETE
+SAVE B
+2022-11-05 20:37:15.538339
+B:START
+2022-11-05 20:37:15.538371
+B:COMPLETE
+LOAD OR CALCULATE INTERPOLATED U,V,W
+2022-11-05 20:53:54.065503
+UVW DO NOT EXIST: CALCULATING...
+LOAD ds_U, ds_V, ds_W AND SET CHUNKS
+SAVE UVW
+2022-11-05 20:53:54.695139
+U:START
+2022-11-05 20:53:54.695163
+U:COMPLETE
+V:START
+2022-11-05 20:59:27.535139
+V:COMPLETE
+W:START
+2022-11-05 21:05:07.579945
+W:COMPLETE
+The new snapshots directory is created!
+MLD
+2022-11-05 21:33:22.398468
+/ext3/miniconda3/lib/python3.9/site-packages/dask/array/reductions.py:540: RuntimeWarning: All-NaN slice encountered
+  return np.nanmin(x_chunk, axis=axis, keepdims=keepdims)
+FILTER
+2022-11-05 21:38:11.484261
+SAVE SNAPSHOT: Bm,Um,Vm,Wm
+2022-11-05 21:38:12.630279
+SAVE SNAPSHOT: Bs,Us,Vs,Ws
+2022-11-05 21:49:56.783197
+SAVE SNAPSHOT: UsBs,VsBs,WsBs
+2022-11-05 22:01:47.506017
+SAVE SNAPSHOT: Bm_x,Bm_y,Bm_z
+2022-11-05 22:19:39.305372
+MLD AVERAGE
+2022-11-05 22:29:38.909723
+SAVE SNAPSHOT MLD: Bm,Um,Vm,Wm
+2022-11-05 22:29:38.958517
+SAVE SNAPSHOT MLD: UsBs,VsBs,WsBs
+2022-11-05 22:45:23.195923
+SAVE SNAPSHOT MLD: Bm_x,Bm_y,Bm_z
+2022-11-05 23:03:22.326158
+COARSE-GRAIN
+2022-11-05 23:13:33.820306
+/ext3/miniconda3/lib/python3.9/site-packages/dask/array/core.py:450: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  o = func(*args, **kwargs)
+SAVE NETCDF: MLD AVG LOWRES
+meso fields
+submeso fluxes
+/bin/bash: line 1: 879273 Killed                  python -u preprocess_data.py
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=26707885.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
