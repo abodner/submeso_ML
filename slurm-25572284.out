@@ -1,5 +1,0 @@
-WARNING: Could not find any nv files on this host!
-  File "/home/ab10313/submeso_ML/preprocess_llc4320_plots.py", line 150
-    del MLD fig
-            ^
-SyntaxError: invalid syntax
