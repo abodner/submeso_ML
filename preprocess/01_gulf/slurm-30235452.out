@@ -1,5 +1,0 @@
-WARNING: Could not find any nv files on this host!
-/home/ab10313/.local/lib/python3.9/site-packages/xrft/xrft.py:47: FutureWarning: Please provide the name of window adhering to scipy.signal.windows. The boolean option will be deprecated in future releases.
-  warnings.warn(
-/bin/bash: line 1: 439369 Killed                  python -u cospectrum.py
-slurmstepd: error: Detected 1 oom-kill event(s) in StepId=30235452.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
