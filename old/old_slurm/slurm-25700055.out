@@ -1,8 +1,0 @@
-WARNING: Could not find any nv files on this host!
-/ext3/miniconda3/lib/python3.9/site-packages/numba/core/cpu.py:97: UserWarning: Numba extension module 'sparse._numba_extension' failed to load due to 'ContextualVersionConflict((numpy 1.22.4 (/ext3/miniconda3/lib/python3.9/site-packages), Requirement.parse('numpy<1.22,>=1.18'), {'numba'}))'.
-  numba.core.entrypoints.init_all()
-PREPROCESS CASE lat_-57_-42_lon_23_37/
-2022-10-06 12:41:18.685276
-T,S,U,V,W FROM LLC4320
-2022-10-06 12:41:18.685320
-slurmstepd: error: *** JOB 25700055 ON cl001 CANCELLED AT 2022-10-06T12:57:28 ***
