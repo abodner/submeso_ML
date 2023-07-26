@@ -28,9 +28,9 @@ PATH_NN= BASE+'NN_data_smooth/'
 
 
 
-import systems.regression_system as regression_system
-import models.fcnn as fcnn
-import util.metrics as metrics
+import submeso_ml.systems.regression_system as regression_system
+import submeso_ml.models.fcnn as fcnn
+#import util.metrics as metrics
 #import util.misc as misc
 #import pyqg_explorer.dataset.forcing_dataset as forcing_dataset
 
