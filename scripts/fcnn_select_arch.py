@@ -28,9 +28,9 @@ PATH_NN= BASE+'NN_data_smooth/'
 
 
 
-import systems.regression_system as regression_system
-import models.fcnn as fcnn
-import util.metrics as metrics
+import submeso_ml.systems.regression_system as regression_system
+import submeso_ml.models.fcnn as fcnn
+import submeso_ml.util.metrics as metrics
 #import util.misc as misc
 #import pyqg_explorer.dataset.forcing_dataset as forcing_dataset
 
@@ -162,7 +162,7 @@ kernel_hidden =3
 activation="ReLU"
 arch="fcnn"
 epochs=100
-save_path=BASE+"models"
+save_path=BASE+"trained_models"
 save_name="fcnn_k3_l3_select.pt"
 lr=0.00024594159283761457
 wd=0.023133758465751404

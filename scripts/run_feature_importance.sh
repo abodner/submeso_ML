@@ -15,4 +15,4 @@ module purge
 singularity exec --nv \
             --overlay /scratch/ab10313/singularity_overlays/overlay-50G-10M.ext3:ro \
             /scratch/work/public/singularity/cuda11.2.2-cudnn8-devel-ubuntu20.04.sif \
-            /bin/bash -c "source /ext3/env.sh; python /home/ab10313/Projects/submeso_ML/scripts/feature_importance/fcnn_select_arch_m_FCOR.py 10"
+            /bin/bash -c "source /ext3/env.sh; python /home/ab10313/Projects/submeso_ML/scripts/feature_importance/fcnn_select_arch_m_vort.py 10"
